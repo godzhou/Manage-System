@@ -21,10 +21,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    This is my JSP page. <br>
-    <form action="" method="post">
+    	登录界面 <br>
+    <form action="servlet/loginServlet" method="post">
     	<input type="text" name="id" ></br>
     	<input type="password" name="password"></br>
+    	选择用户类型：
+    	<label><input type="radio" name="idType" value="student" checked="true">学生</label>
+    	<label><input type="radio" name="idType" value="teacher">老师</label></br>
     	<input type="submit" name="submit" value="登录">
     </form>
   </body>
