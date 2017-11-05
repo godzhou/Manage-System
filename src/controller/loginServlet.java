@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.jms.Session;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -59,7 +60,7 @@ public class loginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
+/*		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
 		out.println("<HTML>");
@@ -70,8 +71,10 @@ public class loginServlet extends HttpServlet {
 		out.println(", using the POST method");
 		out.println("  </BODY>");
 		out.println("</HTML>");
+		String type = request.getParameter("idType");
+		out.print("String:"+type);
 		out.flush();
-		out.close();
+		out.close();*/
 		
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
@@ -83,6 +86,8 @@ public class loginServlet extends HttpServlet {
 				if(sa.studentLogin(id,password)){
 					//登录成功，实现界面跳转
 					//使用session记录登录状态，当窗口关闭后需要重新登录
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/loginSuccess.jsp");
+					dispatcher.forward(request, response);
 				}
 				else if(sa.isExists(id)){
 					//用户存在但是密码不正确
@@ -91,6 +96,9 @@ public class loginServlet extends HttpServlet {
 				}
 			} catch (SQLException e) {
 				
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

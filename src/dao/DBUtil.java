@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 
 public class DBUtil {
 	
-	private static final String url = "jdbc:mysql://loaclhost:3306/managesystem";
+	private static final String url = "jdbc:mysql://localhost:3306/managesystem";
 	private static final String user = "root";
 	private static final String password = "961203";
 	
@@ -17,8 +17,8 @@ public class DBUtil {
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(url,user,password);
-		}catch(ClassNotFoundException | SQLException e){
-			System.out.println(e.toString());
+		}catch(SQLException | ClassNotFoundException e){
+			e.printStackTrace();
 		}
 		return conn;
 	}

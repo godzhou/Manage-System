@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'index.jsp' starting page</title>
+    <title>首页</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -26,8 +26,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<input type="text" name="id" ></br>
     	<input type="password" name="password"></br>
     	选择用户类型：
-    	<label><input type="radio" name="idType" value="student" checked="true">学生</label>
-    	<label><input type="radio" name="idType" value="teacher">老师</label></br>
+    	<label><input id="student" type="radio" name="idType" value="student" checked="true">学生</label>
+    	<label><input id="teacher" type="radio" name="idType" value="teacher">老师</label></br>
     	<input type="submit" name="submit" value="登录">
     </form>
   </body>

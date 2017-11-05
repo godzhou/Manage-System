@@ -12,8 +12,8 @@ import dao.*;
 public class studentAct {
 
 	//检查用户是否存在
-	public boolean isExists(String studentID) throws SQLException{
-		String sql = "select* from table student where studentID=" + studentID;
+	public boolean isExists(String studentID) throws SQLException, ClassNotFoundException{
+		String sql = "select * from student where studentID=\"" + studentID+"\";";
 		ResultSet rs = ADUS.selectData(sql);
 		if(rs.next()){
 			return true;
@@ -22,9 +22,9 @@ public class studentAct {
 	}
 	
 	//验证用户名与密码是否正确
-	public boolean studentLogin(String id,String password) throws SQLException{
+	public boolean studentLogin(String id,String password) throws SQLException, ClassNotFoundException{
 		if(isExists(id)){
-			String sql = "select* from table student where studentID="+id+" and studentPW="+password;
+			String sql = "select * from student where studentID="+id+" and studentPW=\""+password+"\";";
 			ResultSet rs = ADUS.selectData(sql);
 			if(rs.next()){
 				return true;
@@ -37,7 +37,7 @@ public class studentAct {
 /*	select courseName,courseTrem,teacherName,scoreNum 
 	from score,course,teacher 
 	where score.studentID="2015220204003" and course.courseID=score.courseID and course.teacherID=teacher.teacherID;*/
-	public Map<Integer,List<String>> selectStuInfo(String id) throws SQLException{
+	public Map<Integer,List<String>> selectStuInfo(String id) throws SQLException, ClassNotFoundException{
 		int count = 0;
 		Map<Integer, List<String>> map = new HashMap<Integer,List<String>>();
 		String sql = "select courseName,courseTrem,teacherName,scoreNum"+
