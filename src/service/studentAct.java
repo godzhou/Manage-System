@@ -21,6 +21,14 @@ public class studentAct {
 		return false;
 	}
 	
+	//查询学生姓名--->虽然这已经不算学生操作了，但还是先放在这里面吧
+	public String getStuName(String studentID) throws SQLException,ClassNotFoundException{
+		String sql = "select studentName from student where studentID=\"" + studentID + "\";";
+		ResultSet rs = ADUS.selectData(sql);
+		rs.next();
+		return rs.getString("studentName");
+	}
+	
 	//验证用户名与密码是否正确
 	public boolean studentLogin(String id,String password) throws SQLException, ClassNotFoundException{
 		if(isExists(id)){

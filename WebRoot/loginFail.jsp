@@ -4,15 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>登录成功</title>
+<title>Insert title here</title>
 </head>
 <body>
-登陆成功！
-欢迎你，
- <%
- request.setCharacterEncoding("utf-8");
-  %>
-  <%=request.getParameter("name") %>!
- 
+登录失败！
 </body>
 </html>

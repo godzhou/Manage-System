@@ -86,11 +86,16 @@ public class loginServlet extends HttpServlet {
 				if(sa.studentLogin(id,password)){
 					//登录成功，实现界面跳转
 					//使用session记录登录状态，当窗口关闭后需要重新登录
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/loginSuccess.jsp");
+					String turnpath = "/loginSuccess.jsp?name=" + sa.getStuName(id)  ;
+					System.out.println(sa.getStuName(id));
+					RequestDispatcher dispatcher = request.getRequestDispatcher(turnpath);
 					dispatcher.forward(request, response);
+					return;
 				}
 				else if(sa.isExists(id)){
 					//用户存在但是密码不正确
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/loginFail.jsp");
+					dispatcher.forward(request, response);
 				}else{
 					//用户不存在
 				}
