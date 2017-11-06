@@ -15,3 +15,7 @@
 * 遇到了出现中文乱码问题的bug </br>
     经过调试发现是在servlet向jsp传参数时出现的乱码，网上找了很多资料，有网友说request.getParameter是默认采用ISO8859-1来编码的，必须进行转换采用设置字符集的方式解决</br>
 `request.setCharacterEncoding("utf-8");  `
+
+### update 2017.11.06
+* 完成了学生角色操作的部分功能
+* 修改了登录失败时的界面跳转（以后应该还要继续修改）
