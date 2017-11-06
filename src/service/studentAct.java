@@ -62,7 +62,31 @@ public class studentAct {
 			
 			map.put(count, als);
 		}
-		return map;
-		
+		return map;	
 	}
+	
+	/**
+	 * 学生修改信息的操作，能够进行修改的有生日，年龄（以后改成自动计算），密码
+	 */
+	//在输入端对日期进行格式化
+	public boolean modifyStuBirth(String studentID,String date) throws SQLException,ClassNotFoundException{
+		String sql = "update student set birthday=\"" + date + "\" where studentID=\"" + studentID + "\";";
+		if(ADUS.updateData(sql) == 0){
+			return true;
+		}
+		return false;
+	}
+	
+	/*
+	 * 修改密码操作
+	 * 
+	 */
+	public boolean modifyStuPW(String studentID,String newpw) throws SQLException,ClassNotFoundException{
+		String sql = "update student set studentPW=\"" + newpw + "\" where studentID=\"" + studentID + "\";";
+		if(ADUS.updateData(sql) == 0){
+			return true;
+		}
+		return false;
+	}
+	
 }

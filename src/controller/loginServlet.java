@@ -94,10 +94,14 @@ public class loginServlet extends HttpServlet {
 				}
 				else if(sa.isExists(id)){
 					//用户存在但是密码不正确
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/loginFail.jsp");
-					dispatcher.forward(request, response);
+					response.setContentType("text/html;charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.write("密码错误，登录失败！");
 				}else{
 					//用户不存在
+					response.setContentType("text/html;charset=utf-8"); 
+					PrintWriter out = response.getWriter();
+					out.write("用户不存在！");
 				}
 			} catch (SQLException e) {
 				
@@ -107,8 +111,8 @@ public class loginServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		}else{
-			
+		}else if(type.equals("teacher")){
+			//老师的登录功能
 		}
 	}
 
