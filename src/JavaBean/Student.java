@@ -1,19 +1,32 @@
 package JavaBean;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
 import java.util.Date;
 
-public class Student implements Serializable{
+import dao.ADUS;
+
+public class Student extends ADUS{
 	private String studentID;
 	private String studentName;
 	private int age;
 	private String sex;
-	private Date birthday;
+	private String birthday;
 	private String majorID;
+	private String password;
 	
+	public Student(){
+		studentID = "";
+		studentName = "";
+		age = 0;
+		sex = "";
+		birthday = "1970-01-01";
+		majorID = "";
+		setPassword("");
+	}
 	
 	public Student(String studentID, String studentName, int age, String sex,
-			Date birthday, String majorID) {
+			String birthday, String majorID,String password) {
 		super();
 		this.studentID = studentID;
 		this.studentName = studentName;
@@ -21,6 +34,31 @@ public class Student implements Serializable{
 		this.sex = sex;
 		this.birthday = birthday;
 		this.majorID = majorID;
+		this.setPassword(password);
+	}
+	
+	/**
+	 * 获取某个用户信息
+	 */
+	public boolean init(){
+		String sql = "select * from student where studentID=";
+		sql = sql + studentID;
+		
+		try{
+			ResultSet rs = ADUS.selectData(sql);
+			if(rs.next()){
+				this.studentName = rs.getString("studentName");
+				this.age = rs.getInt("age");
+				this.sex = rs.getString("sex");
+				this.birthday = rs.getString("birthday");
+				this.majorID = rs.getString("majorID");
+				this.setPassword(rs.getString("studentPW"));
+				return true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public String getStudentID() {
@@ -47,10 +85,10 @@ public class Student implements Serializable{
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 	public String getMajorID() {
@@ -58,6 +96,14 @@ public class Student implements Serializable{
 	}
 	public void setMajorID(String majorID) {
 		this.majorID = majorID;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	

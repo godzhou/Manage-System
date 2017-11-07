@@ -10,7 +10,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import JavaBean.Student;
 import service.studentAct;
 
 public class loginServlet extends HttpServlet {
@@ -87,7 +89,14 @@ public class loginServlet extends HttpServlet {
 					//登录成功，实现界面跳转
 					//使用session记录登录状态，当窗口关闭后需要重新登录
 					String turnpath = "/loginSuccess.jsp?name=" + sa.getStuName(id)  ;
-					System.out.println(sa.getStuName(id));
+					
+					Student user = new Student();
+					user.setStudentID(id);
+					user.init();
+					//request.setAttribute("User", user);
+					HttpSession session = request.getSession();
+					session.setAttribute("User", user);
+					
 					RequestDispatcher dispatcher = request.getRequestDispatcher(turnpath);
 					dispatcher.forward(request, response);
 					return;

@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<%@ page import="JavaBean.Student" %>
 <title>登录成功</title>
 </head>
 <body>
@@ -11,8 +12,10 @@
 欢迎你，
  <%
  request.setCharacterEncoding("utf-8");
+ Student student = (Student)session.getAttribute("User");
   %>
   <%=request.getParameter("name") %>!
- 
+ <%=student.getAge() %>
+ <%=student.getPassword() %>
 </body>
 </html>
