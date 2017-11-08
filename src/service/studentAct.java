@@ -66,6 +66,7 @@ public class studentAct {
 		DBUtil.closeConn();
 		
 		JSONArray json = JSONArray.fromObject(map);
+		System.out.println(json.toString());
 		return json.toString();	
 	}
 	

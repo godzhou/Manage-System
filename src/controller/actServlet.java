@@ -43,13 +43,14 @@ public class actServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setCharacterEncoding("gbk");
+		response.setCharacterEncoding("utf-8");
 		PrintWriter pw = response.getWriter();
 		studentAct sa = new studentAct();
 		HttpSession session = request.getSession();
 		if(session.getAttribute("User") != null){
 			Student stu = (Student)session.getAttribute("User");
 			try {
+				
 				pw.append(sa.selectStuInfo(stu.getStudentID()));
 				pw.flush();
 			} catch (ClassNotFoundException | SQLException e) {

@@ -16,7 +16,7 @@ public class ADUS {
 		ResultSet resultset = null;
 		Statement stmt = conn.createStatement();
 		resultset = stmt.executeQuery(sql);
-		
+		conn.close();
 		return resultset;
 	}
 	
