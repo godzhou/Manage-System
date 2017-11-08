@@ -95,6 +95,7 @@ public class loginServlet extends HttpServlet {
 					user.init();
 					//request.setAttribute("User", user);
 					HttpSession session = request.getSession();
+					session.setMaxInactiveInterval(60*60);
 					session.setAttribute("User", user);
 					
 					RequestDispatcher dispatcher = request.getRequestDispatcher(turnpath);

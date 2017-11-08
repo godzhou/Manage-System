@@ -4,6 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <script type=text/javascript src=js/jquery.js></script>
+  <script type=text/javascript src=js/stuAct.js></script>
+
 <%@ page import="JavaBean.Student" %>
 <title>登录成功</title>
 </head>
@@ -17,5 +20,6 @@
   <%=request.getParameter("name") %>!
  <%=student.getAge() %>
  <%=student.getPassword() %>
+<button id="btn" action="servlet/actServlet">查询成绩信息</button>
 </body>
 </html>

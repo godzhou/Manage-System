@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.json.JSONArray;
 import dao.*;
 
 public class studentAct {
@@ -42,15 +43,15 @@ public class studentAct {
 	}
 	
 	//查询学生成绩信息并显示
-/*	select courseName,courseTrem,teacherName,scoreNum 
+/*	select courseName,courseTrem,teacher.name,scoreNum 
 	from score,course,teacher 
 	where score.studentID="2015220204003" and course.courseID=score.courseID and course.teacherID=teacher.teacherID;*/
-	public Map<Integer,List<String>> selectStuInfo(String id) throws SQLException, ClassNotFoundException{
+	public String selectStuInfo(String id) throws SQLException, ClassNotFoundException{
 		int count = 0;
-		Map<Integer, List<String>> map = new HashMap<Integer,List<String>>();
-		String sql = "select courseName,courseTrem,teacherName,scoreNum"+
-					 "from score,course,teacher"+
-	                 "where score.studentID=\""+id+"\" and course.courseID=score.courseID and course.teacherID=teacher.teacherID;";
+		Map<String, List<String>> map = new HashMap<String,List<String>>();
+		String sql = "select courseName,courseTrem,teacher.name,scoreNum " +
+				"from score,course,teacher " +
+				"where score.studentID=\""+id+"\" and course.courseID=score.courseID and course.teacherID=teacher.teacherID;";
 		ResultSet rs = ADUS.selectData(sql);
 		while(rs.next()){
 			count++;
@@ -60,9 +61,12 @@ public class studentAct {
 			als.add(rs.getString(3));
 			als.add(rs.getString(4));
 			
-			map.put(count, als);
+			map.put(Integer.toString(count), als);
 		}
-		return map;	
+		DBUtil.closeConn();
+		
+		JSONArray json = JSONArray.fromObject(map);
+		return json.toString();	
 	}
 	
 	/**
