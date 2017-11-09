@@ -24,20 +24,26 @@ public class ADUS {
 	public static int insertData(String sql) throws SQLException,ClassNotFoundException{
 		Connection conn = DBUtil.getConn();
 		Statement stmt = conn.createStatement();
-		return stmt.executeUpdate(sql);
+		int count = stmt.executeUpdate(sql);
+		conn.close();
+		return count;
 	}
 	
 	//数据库的修改操作
 	public static int updateData(String sql) throws SQLException,ClassNotFoundException{
 		Connection conn = DBUtil.getConn();
 		Statement stmt = conn.createStatement();
-		return stmt.executeUpdate(sql);
+		int count = stmt.executeUpdate(sql);
+		conn.close();
+		return count;
 	}
 	
 	//数据库的删除操作
 	public static int deleteData(String sql) throws SQLException,ClassNotFoundException{
 		Connection conn = DBUtil.getConn();
 		Statement stmt = conn.createStatement();
-		return stmt.executeUpdate(sql);
+		int count = stmt.executeUpdate(sql);
+		conn.close();
+		return count;
 	}
 }

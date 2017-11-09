@@ -34,6 +34,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     }
 });
 }
+function modifyPw(){
+	$("#sp").html("输入新密码：<br><input id='newpw' type='text' name='newpw'><input type='button' value='提交' id='btn3' onclick='ajax2()'>");
+}
+function ajax2(){
+var con = $("#newpw").val();
+  		$.ajax({
+    dataType:"json",    //数据类型为json格式
+    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+    type:"GET",
+    url:"stuModifyPw?password="+con,
+    statusCode: {404: function() {
+        alert('page not found'); }
+    },
+    success:function(data,textStatus){
+    	if(data){
+    		$("#sp").html("修改密码成功！");
+    	}else{
+    		$("#sp").html("修改密码失败！");
+    	}
+    }
+});
+}
   </script>
 
 <%@ page import="JavaBean.Student" %>
@@ -49,7 +71,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <%=request.getParameter("name") %>!
  <%=student.getAge() %>
  <%=student.getPassword() %><br>
-<input type="button" value="查询成绩信息" id="btn" onclick="sub()"><br>
+<input type="button" value="查询成绩信息" id="btn" onclick="sub()">
+<input type="button" value="修改密码" id="btn2" onclick="modifyPw()">
+
+<br>
 result:
 <span id="sp"></span>
 </body>

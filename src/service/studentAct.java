@@ -88,7 +88,7 @@ public class studentAct {
 	 */
 	public boolean modifyStuPW(String studentID,String newpw) throws SQLException,ClassNotFoundException{
 		String sql = "update student set studentPW=\"" + newpw + "\" where studentID=\"" + studentID + "\";";
-		if(ADUS.updateData(sql) == 0){
+		if(ADUS.updateData(sql) != 0){
 			return true;
 		}
 		return false;
