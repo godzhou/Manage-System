@@ -13,6 +13,7 @@ public class ADUS {
 	//数据库的查询操作
 	public static ResultSet selectData(String sql) throws SQLException,ClassNotFoundException{
 		Connection conn = DBUtil.getConn();
+		System.out.println(sql);
 		ResultSet resultset = null;
 		Statement stmt = conn.createStatement();
 		resultset = stmt.executeQuery(sql);

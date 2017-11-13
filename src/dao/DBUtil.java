@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 
 public class DBUtil {
 	
-	private static final String url = "jdbc:mysql://localhost:3306/managesystem?useUnicode=true&characterEncoding=utf8";
+	private static final String url = "jdbc:mysql://localhost:3306/managesystem?useUnicode=true&characterEncoding=utf-8";
 	private static final String user = "root";
 	private static final String password = "961203";
 	

@@ -63,11 +63,34 @@ public class studentAct {
 			
 			map.put(Integer.toString(count), als);
 		}
-		DBUtil.closeConn();
+		//DBUtil.closeConn();
 		
 		JSONArray json = JSONArray.fromObject(map);
 		System.out.println(json.toString());
 		return json.toString();	
+	}
+	
+	//按照开课时间查询课程信息
+	public String selectCourseByTerm(String date) throws SQLException,ClassNotFoundException{
+		
+		List<ArrayList<String>> ls = new ArrayList<ArrayList<String>>();
+		
+		String sql = "select courseID,courseName,name" +
+				"from course , teacher" +
+				"where courseTrem = \""+date+"\" and course.teacherID = teacher.teacherID;";
+		System.out.println(sql);
+		ResultSet rs = ADUS.selectData(sql);
+		while(rs.next()){
+			ArrayList<String> cou = new ArrayList<String>();
+			cou.add(rs.getString("courseID"));
+			cou.add(rs.getString("courseName"));
+			cou.add(rs.getString("name"));
+			
+			ls.add(cou);
+		}
+		JSONArray json = JSONArray.fromObject(ls);
+		System.out.println(json.toString());
+		return json.toString();
 	}
 	
 	/**

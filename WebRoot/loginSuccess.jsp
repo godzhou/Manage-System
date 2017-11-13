@@ -35,8 +35,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 });
 }
 function modifyPw(){
-	$("#sp").html("输入新密码：<br><input id='newpw' type='text' name='newpw'><input type='button' value='提交' id='btn3' onclick='ajax2()'>");
+	$("#sp").html("输入新密码：<br><input id='newpw' type='text' name='newpw'><input type='button' value='提交' id='btn_mod' onclick='ajax2()'>");
 }
+
 function ajax2(){
 var con = $("#newpw").val();
   		$.ajax({
@@ -53,6 +54,34 @@ var con = $("#newpw").val();
     	}else{
     		$("#sp").html("修改密码失败！");
     	}
+    }
+});
+}
+function selectCourse(){
+	$("#sp").append("选择你要查询的学期：<select id='sel'><option value='2016-2017春'>2016-2017春</option><option value='2017-2018秋'>2017-2018秋</option><option value='2017-2018春'>2017-2018春</option></select>");
+	$("#sp").append("<input type='button' value='查询' onclick='ajax3()'>");
+}
+function ajax2(){
+var con = $("#sel").val();
+  		$.ajax({
+    dataType:"json",    //数据类型为json格式
+    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+    type:"GET",
+    url:"selectCourseByTerm?term="+con,
+    statusCode: {404: function() {
+        alert('page not found'); }
+    },
+    success:function(data,textStatus){
+    	var htmlCon;
+        htmlCon = "<table border='1'><tr><td>序号</td><td>课程</td><td>学期</td><td>教师</td></tr>";
+        for(var key in data[0]){
+         var count = 0;
+				count++;
+				htmlCon = htmlCon + "<tr><td>"+count+"</td><td>"+data[0][key][0]+"</td><td>"+data[0][key][1]+"</td><td>"+data[0][key][2]+"</td><td>"+data[0][key][3]+"</td></tr>";
+          
+        }
+        htmlCon = htmlCon +"</table>";
+        $("#sp").html(htmlCon);
     }
 });
 }
@@ -73,6 +102,7 @@ var con = $("#newpw").val();
  <%=student.getPassword() %><br>
 <input type="button" value="查询成绩信息" id="btn" onclick="sub()">
 <input type="button" value="修改密码" id="btn2" onclick="modifyPw()">
+<input type="button" value="查看所开课程" id="btn3" onclick="selectCourse()">
 
 <br>
 result:
