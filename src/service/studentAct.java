@@ -70,13 +70,35 @@ public class studentAct {
 		return json.toString();	
 	}
 	
+	//查询所有的课程信息
+	public String selectAllCourse() throws SQLException,ClassNotFoundException{
+		List<ArrayList<String>> ls = new ArrayList<ArrayList<String>>();
+		String sql = "select courseTrem,courseID,courseName,name "+
+				"from course , teacher "+
+				"where course.teacherID = teacher.teacherID;";
+		ResultSet rs = ADUS.selectData(sql);
+		while(rs.next()){
+			ArrayList<String> ar = new ArrayList<>();
+			ar.add(rs.getString("courseTrem"));
+			ar.add(rs.getString("courseID"));
+			ar.add(rs.getString("courseName"));
+			ar.add(rs.getString("name"));
+			
+			ls.add(ar);
+		}
+		JSONArray json = JSONArray.fromObject(ls);
+		System.out.println(json.toString());
+		return json.toString();
+		
+	}
+	
 	//按照开课时间查询课程信息
 	public String selectCourseByTerm(String date) throws SQLException,ClassNotFoundException{
 		
 		List<ArrayList<String>> ls = new ArrayList<ArrayList<String>>();
 		
-		String sql = "select courseID,courseName,name" +
-				"from course , teacher" +
+		String sql = "select courseID,courseName,name " +
+				"from course , teacher " +
 				"where courseTrem = \""+date+"\" and course.teacherID = teacher.teacherID;";
 		System.out.println(sql);
 		ResultSet rs = ADUS.selectData(sql);

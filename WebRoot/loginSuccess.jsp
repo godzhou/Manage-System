@@ -58,10 +58,11 @@ var con = $("#newpw").val();
 });
 }
 function selectCourse(){
+	$("#sp").html("");
 	$("#sp").append("选择你要查询的学期：<select id='sel'><option value='2016-2017春'>2016-2017春</option><option value='2017-2018秋'>2017-2018秋</option><option value='2017-2018春'>2017-2018春</option></select>");
 	$("#sp").append("<input type='button' value='查询' onclick='ajax3()'>");
 }
-function ajax2(){
+function ajax3(){
 var con = $("#sel").val();
   		$.ajax({
     dataType:"json",    //数据类型为json格式
@@ -73,15 +74,15 @@ var con = $("#sel").val();
     },
     success:function(data,textStatus){
     	var htmlCon;
-        htmlCon = "<table border='1'><tr><td>序号</td><td>课程</td><td>学期</td><td>教师</td></tr>";
-        for(var key in data[0]){
+        htmlCon = "<table border='1'><tr><td>序号</td><td>课程</td><td>教师</td></tr>";
+        for(var key in data){
          var count = 0;
 				count++;
-				htmlCon = htmlCon + "<tr><td>"+count+"</td><td>"+data[0][key][0]+"</td><td>"+data[0][key][1]+"</td><td>"+data[0][key][2]+"</td><td>"+data[0][key][3]+"</td></tr>";
+				htmlCon = htmlCon + "<tr><td>"+data[key][0]+"</td><td>"+data[key][1]+"</td><td>"+data[key][2]+"</td></tr>";
           
         }
         htmlCon = htmlCon +"</table>";
-        $("#sp").html(htmlCon);
+        $("#sp").append(htmlCon);
     }
 });
 }

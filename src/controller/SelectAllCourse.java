@@ -11,14 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import service.studentAct;
-import JavaBean.Student;
 
-public class actServlet extends HttpServlet {
+public class SelectAllCourse extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public actServlet() {
+	public SelectAllCourse() {
 		super();
 	}
 
@@ -44,27 +43,22 @@ public class actServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		
-		response.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("gbk");
 		PrintWriter pw = response.getWriter();
 		studentAct sa = new studentAct();
 		HttpSession session = request.getSession();
+		
 		if(session.getAttribute("User") != null){
-			Student stu = (Student)session.getAttribute("User");
-			try {
-				
-				pw.append(sa.selectStuInfo(stu.getStudentID()));
-				pw.flush();
-			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
+			try{
+				pw.append(sa.selectAllCourse());
+				pw.close();
+				return;
+			}catch(SQLException | ClassNotFoundException e){
 				e.printStackTrace();
 			}
-		}else{
-			pw.append("flase");
-			pw.flush();
 		}
-		
-		
-		
+
+		pw.close();
 	}
 
 	/**
@@ -79,6 +73,7 @@ public class actServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 
 		doGet(request,response);
 	}

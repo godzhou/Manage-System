@@ -43,7 +43,6 @@ public class selectCourseByTerm extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setCharacterEncoding("utf-8");
-		request.setCharacterEncoding("utf-8");
 		PrintWriter pw = response.getWriter();
 		studentAct sa = new studentAct();
 		HttpSession session = request.getSession();
