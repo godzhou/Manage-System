@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import JavaBean.Course;
+import JavaBean.PageBean;
 import service.studentAct;
 
 public class selectCourseByTerm extends HttpServlet {

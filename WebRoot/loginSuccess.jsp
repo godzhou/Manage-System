@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%  
 String path = request.getContextPath();  
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
@@ -23,8 +23,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     success:function(data,textStatus){
     	var htmlCon;
         htmlCon = "<table border='1'><tr><td>序号</td><td>课程</td><td>学期</td><td>教师</td><td>分数</td></tr>";
+        var count = 0;
         for(var key in data[0]){
-         var count = 0;
+   
 				count++;
 				htmlCon = htmlCon + "<tr><td>"+count+"</td><td>"+data[0][key][0]+"</td><td>"+data[0][key][1]+"</td><td>"+data[0][key][2]+"</td><td>"+data[0][key][3]+"</td></tr>";
           
@@ -66,7 +67,8 @@ function ajax3(){
 var con = $("#sel").val();
   		$.ajax({
     dataType:"json",    //数据类型为json格式
-    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+    //contentType: "application/x-www-form-urlencoded; charset=gb2312",
+    scriptCharset:"utf-8",
     type:"GET",
     url:"selectCourseByTerm?term="+con,
     statusCode: {404: function() {
@@ -104,6 +106,8 @@ var con = $("#sel").val();
 <input type="button" value="查询成绩信息" id="btn" onclick="sub()">
 <input type="button" value="修改密码" id="btn2" onclick="modifyPw()">
 <input type="button" value="查看所开课程" id="btn3" onclick="selectCourse()">
+
+<a href="<c:url value='SelectServlet' /> ">查询课程</a>
 
 <br>
 result:

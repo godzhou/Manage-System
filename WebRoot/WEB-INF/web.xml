@@ -33,6 +33,13 @@
     <servlet-name>SelectAllCourse</servlet-name>
     <servlet-class>controller.SelectAllCourse</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SelectServlet</servlet-name>
+    <servlet-class>controller.SelectServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -40,23 +47,27 @@
 
   <servlet-mapping>
     <servlet-name>loginServlet</servlet-name>
-    <url-pattern>/servlet/loginServlet</url-pattern>
+    <url-pattern>/loginServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>actServlet</servlet-name>
-    <url-pattern>/servlet/actServlet</url-pattern>
+    <url-pattern>/actServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>stuModifyPw</servlet-name>
-    <url-pattern>/servlet/stuModifyPw</url-pattern>
+    <url-pattern>/stuModifyPw</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>selectCourseByTerm</servlet-name>
-    <url-pattern>/servlet/selectCourseByTerm</url-pattern>
+    <url-pattern>/selectCourseByTerm</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>SelectAllCourse</servlet-name>
-    <url-pattern>/servlet/SelectAllCourse</url-pattern>
+    <url-pattern>/SelectAllCourse</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SelectServlet</servlet-name>
+    <url-pattern>/SelectServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>

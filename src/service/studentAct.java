@@ -1,5 +1,7 @@
 package service;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import JavaBean.Course;
+import JavaBean.PageBean;
 import net.sf.json.JSONArray;
 import dao.*;
 
@@ -91,6 +95,42 @@ public class studentAct {
 		return json.toString();
 		
 	}
+	
+	//分页查询课程信息
+	public PageBean<Course> findAll(int pageNum,int pageSize) throws SQLException,ClassNotFoundException{
+		int count = 0;
+		PageBean<Course> pb = new PageBean<Course>();
+		pb.setPageNum(pageNum);
+		pb.setPageSize(pageSize);
+		
+		String sqlCount = "select count(*) from course";
+		ResultSet rs = ADUS.selectData(sqlCount);
+		if(rs.next()){
+			count = rs.getInt(1);
+		}
+		pb.setTotalRecords(count);
+		
+		String sqlFind = "select * from course order by courseID limit ?,?";
+		Connection conn = DBUtil.getConn();
+		PreparedStatement ps = conn.prepareStatement(sqlFind);
+		ps.setInt(1, (pageNum-1)*pageSize);
+		ps.setInt(2, pageSize);
+		ResultSet rs2 = ps.executeQuery();
+		
+		List<Course> list = new ArrayList<Course>();
+		while(rs2.next()){
+			Course course = new Course();
+			course.setCourseID(rs2.getString("courseID"));
+			course.setCourseName(rs2.getString("courseName"));
+			course.setCourseTrem(rs2.getString("courseTrem"));
+			course.setTeacherID(rs2.getString("teacherID"));
+			
+			list.add(course);
+		}
+		pb.setBeanList(list);
+		return pb;
+	}
+	
 	
 	//按照开课时间查询课程信息
 	public String selectCourseByTerm(String date) throws SQLException,ClassNotFoundException{
