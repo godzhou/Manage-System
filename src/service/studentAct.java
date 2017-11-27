@@ -99,6 +99,7 @@ public class studentAct {
 	//分页查询课程信息
 	public PageBean<Course> findAll(int pageNum,int pageSize) throws SQLException,ClassNotFoundException{
 		int count = 0;
+		int totalPage = 0;
 		PageBean<Course> pb = new PageBean<Course>();
 		pb.setPageNum(pageNum);
 		pb.setPageSize(pageSize);
@@ -107,8 +108,10 @@ public class studentAct {
 		ResultSet rs = ADUS.selectData(sqlCount);
 		if(rs.next()){
 			count = rs.getInt(1);
+			totalPage = count/10 + 1;
 		}
 		pb.setTotalRecords(count);
+		pb.setTotalPage(totalPage);
 		
 		String sqlFind = "select * from course order by courseID limit ?,?";
 		Connection conn = DBUtil.getConn();
