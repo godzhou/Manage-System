@@ -27,7 +27,7 @@
     </table>
     </br>
     <center>
-    	第${pb.pageNum }页/共${pb.totalRecords/10 + 1 }
+    	第${pb.pageNum }页/共${pb.totalPage }页 
     	<a href="${pb.url }?pageNum=1">首页</a>
     	<c:if test="${pb.pageNum>1 }">
     		<a href="${pb.url }?pageNum=${pb.pageNum-1}">上一页</a>

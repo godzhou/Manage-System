@@ -15,7 +15,7 @@ import JavaBean.PageBean;
 
 public class SelectServlet extends HttpServlet {
 
-	public void doGet(HttpServletRequest request,HttpServletResponse response)
+	public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{
 		String param = request.getParameter("pageNum");
 		String contextPath = request.getContextPath();
@@ -43,8 +43,8 @@ public class SelectServlet extends HttpServlet {
 		//response.sendRedirect("list.jsp");
 	}
 	
-	public void doPost(HttpServletRequest request,HttpServletResponse response)
+	public void doGet(HttpServletRequest request,HttpServletResponse response)
 					throws ServletException,IOException{
-		doGet(request,response);
+		doPost(request,response);
 	}
 }
