@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     	登录界面 <br>
-    	<%@ include file="login.html" %>
+    	<jsp:forward page="/login.jsp"/>
     <!--form action="servlet/loginServlet" method="post">
     	<input type="text" name="id" ></br>
     	<input type="password" name="password"></br>

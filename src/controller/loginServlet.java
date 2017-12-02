@@ -81,11 +81,15 @@ public class loginServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		String type = request.getParameter("idType");
+		String validate = request.getParameter("validateCode");
+		String codeSession = (String)request.getSession().getAttribute("validation_code");
+		
+		System.out.println(codeSession);
 		
 		studentAct sa = new studentAct();
 		if(type.equals("student")){
 			try {
-				if(sa.studentLogin(id,password)){
+				if(sa.studentLogin(id,password) && validate.equals(codeSession)){
 					//登录成功，实现界面跳转
 					//使用session记录登录状态，当窗口关闭后需要重新登录
 					String turnpath = "/loginSuccess.jsp?name=" + sa.getStuName(id)  ;
@@ -101,6 +105,11 @@ public class loginServlet extends HttpServlet {
 					RequestDispatcher dispatcher = request.getRequestDispatcher(turnpath);
 					dispatcher.forward(request, response);
 					return;
+				}
+				else if(!validate.equals(codeSession)){
+					response.setContentType("text/html;charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.write("验证码错误，请重新输入！");
 				}
 				else if(sa.isExists(id)){
 					//用户存在但是密码不正确

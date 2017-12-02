@@ -1,12 +1,17 @@
 
 <!DOCTYPE html>
 <%@ page language="java"  pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 
-
-<html lang="en" >
+<html >
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="login.css" />
+    <script src="/js/jquery.js"></script>
+	<script src="/js/login.js"></script>
     <title>Title</title>
 </head>
 <body>
@@ -30,6 +35,8 @@
             <form action="loginServlet" method="post">
                 <input class="input_c fo_ur" name="id" type="text" value="请输入登陆邮箱" /><br>
                 <input class="input_c" name="password" type="password" value="" /><br>
+                <label>验证码：</label><input type="text" name="validateCode" />
+                <span><img id="validate_img" alt="点击刷新" src="CreateCode" onclick="javascript:this.src='CreateCode?rnd='+Math.random()"></span>
                 <div class="chose">选择用户类型：</div>
                 <label><input type="radio" name="idType" value="student" checked="true">学生</label>
                 <label><input type="radio" name="idType" value="teacher">老师</label></br>
@@ -44,8 +51,6 @@
 
     </div>
 </div>
-<script src="js/jquery.js"></script>
-<script src="js/login.js"></script>
 
 </body>
 </html>

@@ -39,12 +39,19 @@
     <servlet-name>SelectServlet</servlet-name>
     <servlet-class>controller.SelectServlet</servlet-class>
   </servlet>
-  <servlet>
+  <!-- servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>DefaultServlet</servlet-name>
     <servlet-class>controller.DefaultServlet</servlet-class>
+  </servlet-->
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CreateCode</servlet-name>
+    <servlet-class>controller.CreateCode</servlet-class>
   </servlet>
+
 
 
 
@@ -76,9 +83,13 @@
     <servlet-name>SelectServlet</servlet-name>
     <url-pattern>/SelectServlet</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
+  <!--servlet-mapping>
     <servlet-name>DefaultServlet</servlet-name>
     <url-pattern>/</url-pattern>
+  </servlet-mapping-->
+  <servlet-mapping>
+    <servlet-name>CreateCode</servlet-name>
+    <url-pattern>/CreateCode</url-pattern>
   </servlet-mapping>
 
 </web-app>
